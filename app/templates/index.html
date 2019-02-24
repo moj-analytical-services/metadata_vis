@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Welcome to the Metadata Search Tool</h1>
+
+    <form id="searchform" >
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.searchterms.label }}<br>
+            {{ form.searchterms(size=32) }}
+        </p>
+
+
+        <p><button type="button" id = "submit", value="Search">Search</button></p>
+
+    </form>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var url = "{{ url_for('search') }}"
+
+        d3.select('#submit').on('click', function() {
+
+
+
+            d3.json(url, {
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    "X-CSRFToken": "{{ form.csrf_token._value() }}"
+                },
+                body: JSON.stringify({'searchterms': 'hello', 'csrf_token': d3.select("#csrf_token").node().value})
+            })
+            .then(json => {
+                debugger;
+                console.log(json)
+            });
+
+        })
+
+
+
+
+
+    });
+
+    // xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+
+</script>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+
+{% endblock %}
