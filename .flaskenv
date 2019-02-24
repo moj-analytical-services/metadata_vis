@@ -1,0 +1,1 @@
+FLASK_APP=metadata_tool.py
