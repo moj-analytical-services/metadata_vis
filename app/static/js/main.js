@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-
     d3.select('#submit').on('click', function() {
 
         d3.json(URL_FOR_SEARCH, {
