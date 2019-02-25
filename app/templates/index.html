@@ -16,38 +16,12 @@
     </form>
 
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var url = "{{ url_for('search') }}"
-
-        d3.select('#submit').on('click', function() {
-
-
-
-            d3.json(url, {
-                method: 'POST',
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                    "X-CSRFToken": "{{ form.csrf_token._value() }}"
-                },
-                body: JSON.stringify({'searchterms': 'hello', 'csrf_token': d3.select("#csrf_token").node().value})
-            })
-            .then(json => {
-                debugger;
-                console.log(json)
-            });
-
-        })
-
-
-
-
-
-    });
-
-    // xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
-
+<script type=text/javascript>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }}; //http://flask.pocoo.org/docs/1.0/patterns/jquery/#where-is-my-site
+    URL_FOR_SEARCH = "{{ url_for('search') }}"
+    debugger;
 </script>
+<script src= "{{url_for('static', filename='js/main.js')}}"></script>
 
 <script src="https://d3js.org/d3.v5.min.js"></script>
 

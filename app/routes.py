@@ -5,7 +5,6 @@ from app.forms import SearchForm
 @app.route('/')
 @app.route('/index')
 def index():
-
     form = SearchForm()
     return  render_template('index.html', title='Home', form=form)
 
