@@ -1,5 +1,8 @@
 populate_db/metadata_folders/
 app.db
+ipynb_checkpoints/
+*.ipynb
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
