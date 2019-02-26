@@ -12,7 +12,6 @@ def index():
 def search():
     form = SearchForm()
     if form.validate_on_submit():
-        # return jsonify(data={'message': 'Search terms: {}'.format(form.searchterms.data)})
 
         conn = db.session.connection
         session = db.session
@@ -33,6 +32,6 @@ def search():
             dictrow = dict(zip(column_names, row))
             table.append(dictrow)
 
-    return jsonify(data=table)
+        return jsonify(data=table)
 
     return jsonify(data=form.errors)
