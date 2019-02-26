@@ -17,12 +17,9 @@ def search():
         session = db.session
 
         sql = """
-            select * from databases as db
-            left join tables as tbl
-            on db.db_id= tbl.db_id
-            left join columns as cl
-            on tbl.tbl_id = cl.tbl_id
-        """
+        SELECT * FROM fulltextsearch WHERE fulltextsearch MATCH '{}' ORDER BY bm25(fulltextsearch, 1,2,1,2,1,2);
+        """.format(form.searchterms.data)
+
 
         result = db.engine.execute(sql)
         column_names = [r[0] for r in result.cursor.description]

@@ -10,16 +10,19 @@
             {{ form.searchterms(size=32) }}
         </p>
 
-
         <p><button type="button" id = "submit", value="Search">Search</button></p>
 
     </form>
+
+    <div id="outputs">
+        <div id="data_table"></div>
+    </div>
 
 
 <script type=text/javascript>
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }}; //http://flask.pocoo.org/docs/1.0/patterns/jquery/#where-is-my-site
     URL_FOR_SEARCH = "{{ url_for('search') }}"
-    debugger;
+
 </script>
 <script src= "{{url_for('static', filename='js/main.js')}}"></script>
 

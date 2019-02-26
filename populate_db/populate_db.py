@@ -10,8 +10,8 @@ import json
 
 if __name__ == "__main__":
 
-
-    db.drop_all() #TODO probably make this optional!!
+    # db.drop_all() #TODO probably make this optional!!
+    os.remove("app.db")
     db.session.commit()
     db.create_all()
 
@@ -50,6 +50,44 @@ if __name__ == "__main__":
 
                 db.session.add(c)
                 db.session.commit()
+
+    # Get column
+    sql = """
+    CREATE VIEW joined as
+    select * from databases as db
+                left join tables as tbl
+                on db.db_id= tbl.db_id
+                left join columns as cl
+                on tbl.tbl_id = cl.tbl_id
+
+    """
+    result = db.engine.execute(sql)
+
+    # Create FTS5 table
+    sql = "CREATE VIRTUAL TABLE fulltextsearch USING fts5(db_name, db_desc, tbl_name, tbl_desc, clm_name, clm_desc);"
+
+    result = db.engine.execute(sql)
+
+    sql = "INSERT INTO fulltextsearch (db_name, db_desc, tbl_name, tbl_desc, clm_name, clm_desc) SELECT  db_name, db_desc, tbl_name, tbl_desc, clm_name, clm_desc from joined"
+
+    db.engine.execute(sql)
+
+    sql = "pragma compile_options"
+
+    rows = db.engine.execute(sql)
+
+    # cur.execute(sql)
+    # rows = cur.fetchall()
+
+    print(rows.fetchall())
+
+    sql = "SELECT * FROM fulltextsearch WHERE fulltextsearch MATCH 'sensor' ORDER BY rank;"
+    rows = db.engine.execute(sql)
+    # cur.execute(sql)
+    # rows = cur.fetchall()
+    print(rows.cursor.description)
+    # print(rows.fetchall())
+
 
 
 
