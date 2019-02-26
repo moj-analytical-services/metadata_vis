@@ -12,6 +12,7 @@ if __name__ == "__main__":
 
 
     db.drop_all() #TODO probably make this optional!!
+    db.session.commit()
     db.create_all()
 
     subfolders = [f.path for f in os.scandir("populate_db/metadata_folders/") if f.is_dir() ]
@@ -36,7 +37,7 @@ if __name__ == "__main__":
             t = Table()
             t.tbl_name = tbljson["name"]
             t.tbl_desc = tbljson["description"]
-            t.database = d
+            t.databases = d
             db.session.add(t)
             db.session.commit()
 
@@ -45,7 +46,7 @@ if __name__ == "__main__":
                 c.clm_desc = column["description"]
                 c.clm_name = column["name"]
 
-                c.table = t
+                c.tables = t
 
                 db.session.add(c)
                 db.session.commit()
