@@ -15,9 +15,12 @@
     </form>
 
     <div id="outputs">
-        <div id="data_table"></div>
+        <div id="summary_table"></div>
+        <div id="database_info"></div>
+        <div id="table_info"></div>
+        <div id="field_info"></div>
+        <div id="sample_sql"></div>
     </div>
-
 
 <script type=text/javascript>
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }}; //http://flask.pocoo.org/docs/1.0/patterns/jquery/#where-is-my-site
