@@ -1,8 +1,8 @@
 FROM python:3.6-alpine
 
-RUN adduser -D metadata
+RUN adduser -D metadata_tool
 
-WORKDIR /home/metadata
+WORKDIR /home/metadata_tool
 
 COPY requirements.txt requirements.txt
 RUN python -m venv venv
@@ -13,17 +13,14 @@ COPY app.db app.db
 
 COPY app app
 
-COPY test_docker.py test_docker.py
+COPY metadata_tool.py config.py boot.sh ./
 
-RUN python /home/metadata/test_docker.py
-# COPY microblog.py config.py ./
+RUN chmod +x boot.sh
 
-# RUN chmod +x boot.sh
+ENV FLASK_APP metadata_tool.py
 
-# ENV FLASK_APP microblog.py
-
-# RUN chown -R microblog:microblog ./
-# USER microblog
+RUN chown -R metadata_tool:metadata_tool ./
+USER metadata_tool
 
 EXPOSE 5000
-# ENTRYPOINT ["./boot.sh"]
+ENTRYPOINT ["./boot.sh"]
