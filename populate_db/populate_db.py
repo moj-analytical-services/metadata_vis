@@ -64,11 +64,16 @@ if __name__ == "__main__":
     result = db.engine.execute(sql)
 
     # Create FTS5 table
-    sql = "CREATE VIRTUAL TABLE fulltextsearch USING fts5(db_name, db_desc, tbl_name, tbl_desc, clm_name, clm_desc);"
+    sql = """CREATE VIRTUAL TABLE fulltextsearch
+           USING fts5(db_id, tbl_id, clm_id, db_name, db_desc, tbl_name, tbl_desc, clm_name, clm_desc);
+           """
 
     result = db.engine.execute(sql)
 
-    sql = "INSERT INTO fulltextsearch (db_name, db_desc, tbl_name, tbl_desc, clm_name, clm_desc) SELECT  db_name, db_desc, tbl_name, tbl_desc, clm_name, clm_desc from joined"
+    sql = """INSERT INTO fulltextsearch
+                    (db_id, tbl_id, clm_id, db_name, db_desc, tbl_name, tbl_desc, clm_name, clm_desc)
+             SELECT  db_id, tbl_id, clm_id, db_name, db_desc, tbl_name, tbl_desc, clm_name, clm_desc from joined
+    """
 
     db.engine.execute(sql)
 

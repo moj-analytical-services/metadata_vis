@@ -21,9 +21,11 @@ def search():
         session = db.session
 
         sql = """
-        SELECT * FROM fulltextsearch WHERE fulltextsearch MATCH ? ORDER BY bm25(fulltextsearch, 1,2,1,2,1,2);
+        SELECT *
+        FROM fulltextsearch
+        WHERE fulltextsearch MATCH ?
+        ORDER BY bm25(fulltextsearch, 0,0,0,1,2,1,2,1,2);
         """
-
 
         result = db.engine.execute(sql, (form.searchterms.data,))
         column_names = [r[0] for r in result.cursor.description]
