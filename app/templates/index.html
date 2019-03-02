@@ -3,16 +3,13 @@
 {% block content %}
     <h1>Welcome to the Metadata Search Tool</h1>
 
-    <form id="searchform" >
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.searchterms.label }}<br>
-            {{ form.searchterms(size=32) }}
-        </p>
+    <div id="search_inputs">
+    <p>
+    <label for="searchterms">Search terms</label><br>
+    <input id="searchterms" name="searchterms" required="" size="32" type="text" value="">
+    </p>
 
-        <p><button type="button" id = "submit", value="Search">Search</button></p>
-
-    </form>
+    </div>
 
     <div id="outputs">
         <div id="summary_table"></div>

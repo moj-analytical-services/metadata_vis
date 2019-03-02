@@ -12,32 +12,33 @@ def index():
     return  render_template('index.html', title='Home', form=form)
 
 
-@app.route('/search/', methods=['post'])
+@app.route('/search/', methods=['get'])
 def search():
-    form = SearchForm()
-    if form.validate_on_submit():
 
-        conn = db.session.connection
-        session = db.session
 
-        sql = """
-        SELECT *
-        FROM fulltextsearch
-        WHERE fulltextsearch MATCH ?
-        ORDER BY bm25(fulltextsearch, 0,0,0,1,2,1,2,1,2);
-        """
+    print("hello")
+    conn = db.session.connection
+    session = db.session
 
-        result = db.engine.execute(sql, (form.searchterms.data,))
-        column_names = [r[0] for r in result.cursor.description]
+    searchterms = request.args.get('searchterms')
+    print(searchterms)
 
-        table = []
-        for row in result.fetchall():
-            dictrow = dict(zip(column_names, row))
-            table.append(dictrow)
+    sql = """
+    SELECT *
+    FROM fulltextsearch
+    WHERE fulltextsearch MATCH ?
+    ORDER BY bm25(fulltextsearch, 0,0,0,1,2,1,2,1,2);
+    """
 
-        return jsonify(data=table)
+    result = db.engine.execute(sql, (searchterms,))
+    column_names = [r[0] for r in result.cursor.description]
 
-    return jsonify(data=form.errors)
+    table = []
+    for row in result.fetchall():
+        dictrow = dict(zip(column_names, row))
+        table.append(dictrow)
+
+    return jsonify(data=table)
 
 
 @app.route('/db_info/', methods=['get'])

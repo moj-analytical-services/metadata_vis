@@ -2,17 +2,26 @@ let SEARCH_DATA = {}
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    d3.select('#submit').on('click', function() {
+    d3.select('#searchterms').on('keyup', function(d) {
 
-        d3.json(URL_FOR_SEARCH, {
-            method: 'POST',
-            headers: {
-                "Content-type": "application/json; charset=UTF-8",
-                "X-CSRFToken": "{{ form.csrf_token._value() }}"
-            },
-            body: JSON.stringify({'searchterms': d3.select("#searchterms").node().value, 'csrf_token': d3.select("#csrf_token").node().value})
-        })
-        .then(display_search_results);
+
+        if(d3.event.key === "Enter"){
+
+            let params = {'searchterms': d3.select("#searchterms").node().value}
+            const search_params = new URLSearchParams(params);
+
+            // searchParams.toString() === 'var1=value1&var2=value2'
+            d3.json(URL_FOR_SEARCH + "?" + search_params, {
+                method: 'GET',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                body: JSON.stringify()
+            })
+            .then(display_search_results);
+        }
+
+
     })
 
 });
@@ -38,9 +47,6 @@ function display_search_results(data) {
     container.html("")
 
     tabulate_summary_data(SEARCH_DATA, container)
-
-
-
 
 }
 
