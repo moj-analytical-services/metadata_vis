@@ -6,7 +6,7 @@ docker build -t metadata .
 # The -u makes sure that stdout (print statements) get send to the command line whilst it's running
 
 docker run \
-   -p 8000:8000 \
+   -p 80:80 \
    -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
    -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
       metadata

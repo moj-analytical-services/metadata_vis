@@ -1,6 +1,6 @@
 FROM python:3.6-alpine
 
-RUN adduser -D metadata_tool
+# RUN adduser -D metadata_tool
 
 WORKDIR /home/metadata_tool
 
@@ -17,8 +17,8 @@ RUN chmod +x boot.sh
 
 ENV FLASK_APP metadata_tool.py
 
-RUN chown -R metadata_tool:metadata_tool ./
-USER metadata_tool
+# RUN chown -R metadata_tool:metadata_tool ./
+# USER metadata_tool
 
-EXPOSE 8000
+EXPOSE 80
 ENTRYPOINT ["./boot.sh"]
