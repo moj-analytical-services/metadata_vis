@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     d3.select('#searchterms').on('keyup', function(d) {
 
-
         if(d3.event.key === "Enter"){
 
             let params = {'searchterms': d3.select("#searchterms").node().value}
@@ -48,25 +47,39 @@ function display_search_results(data) {
 
     tabulate_summary_data(SEARCH_DATA, container)
 
+    display_row_details(SEARCH_DATA[0])
+
+}
+
+function populate_sample_sql(d) {
+
+    sql = `SELECT ${d.clm_name}, *
+    FROM ${d.db_name}.${d.tbl_name}
+    LIMIT 10`
+
+    d3.select("#sample_sql").html(sql)
+
+
+}
+
+function display_row_details(d) {
+
+    d3.text(`/db_info/?id=${d["db_id"]}`).then(function(response) {
+        d3.select("#database_info").html(response)
+    });
+
+    d3.text(`/tbl_info/?id=${d["tbl_id"]}`).then(function(response) {
+        d3.select("#table_info").html(response)
+    });
+
+    d3.text(`/clm_info/?id=${d["clm_id"]}`).then(function(response) {
+        d3.select("#column_info").html(response)
+    });
+
+    populate_sample_sql(d)
 }
 
 function tabulate_summary_data(data, container) {
-
-    function row_on_click(d) {
-
-        d3.text(`/db_info/?id=${d["db_id"]}`).then(function(response) {
-            d3.select("#database_info").html(response)
-        });
-
-        d3.text(`/tbl_info/?id=${d["tbl_id"]}`).then(function(response) {
-            d3.select("#table_info").html(response)
-        });
-
-        d3.text(`/clm_info/?id=${d["clm_id"]}`).then(function(response) {
-            d3.select("#column_info").html(response)
-        });
-
-    }
 
     let cols_to_display = ["db_name", "tbl_name", "clm_name"]
     let col_headers = ["Database name", "Table name", "Column name"]
@@ -88,7 +101,7 @@ function tabulate_summary_data(data, container) {
       .enter()
       .append('tr');
 
-    rows.on("click", row_on_click)
+    rows.on("click", display_row_details)
 
     // create a cell in each row for each column
     var cells = rows.selectAll('td')

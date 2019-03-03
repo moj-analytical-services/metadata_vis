@@ -15,13 +15,10 @@ def index():
 @app.route('/search/', methods=['get'])
 def search():
 
-
-    print("hello")
     conn = db.session.connection
     session = db.session
 
     searchterms = request.args.get('searchterms')
-    print(searchterms)
 
     sql = """
     SELECT *
