@@ -4,7 +4,7 @@ class Database(db.Model):
     __tablename__ = "databases"
     db_id = db.Column(db.Integer, primary_key=True)
     db_name = db.Column(db.String(64), index=True, unique=True)
-    db_desc = db.Column(db.String(120), index=True, unique=True)
+    db_desc = db.Column(db.String(120), index=True)
 
     tables = db.relationship('Table', backref='databases', lazy='dynamic')
 
@@ -15,7 +15,7 @@ class Table(db.Model):
     __tablename__ = "tables"
     tbl_id = db.Column(db.Integer, primary_key=True)
     tbl_name = db.Column(db.String(64), index=True, unique=True)
-    tbl_desc = db.Column(db.String(120), index=True, unique=True)
+    tbl_desc = db.Column(db.String(120), index=True)
     db_id = db.Column(db.Integer, db.ForeignKey('databases.db_id'))
 
     fields = db.relationship('Column', backref='tables', lazy='dynamic')

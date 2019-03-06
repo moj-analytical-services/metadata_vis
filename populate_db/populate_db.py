@@ -1,17 +1,23 @@
+# This script needs to be run in the virtual env i.e.
+# source venv/bin/activate
+# python populate_db/populate_db.py
+
 import sys
 import os
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
-from app.models import Database, Table, Column
-from app import db
+app_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, "app"))
+sys.path.append(app_path)
+
+from main import db
+from models import Database, Table, Column
+
 import json
 
 
 if __name__ == "__main__":
 
     # db.drop_all() #TODO probably make this optional!!
-    os.remove("app.db")
+    os.remove("app/app.db")
     db.session.commit()
     db.create_all()
 

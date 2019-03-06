@@ -40,11 +40,12 @@ def clone_metadata_folder(git_repo, path_to_meta):
 if __name__ == "__main__":
     clone_list = []
     clone_list.append(("git@github.com:moj-analytical-services/airflow-occupeye-scraper.git", "glue/meta_data/occupeye_db"))
-    # clone_list.append(("git@github.com:moj-analytical-services/airflow-nomis-transform.git", "meta_data/curated"))
     clone_list.append(("git@github.com:moj-analytical-services/airflow_natstats_postcodes.git", "meta_data/curated"))
+    clone_list.append(("git@github.com:moj-analytical-services/airflow_get_index_of_multiple_deprivation.git", "meta_data"))
     clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/crest"))
     clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/lookups"))
     clone_list.append(("git@github.com:moj-analytical-services/airflow-magistrates-data-engineering.git", "meta_data/curated"))
-    
+    clone_list.append(("git@github.com:moj-analytical-services/airflow-nomis-transform.git", "meta_data/curated"))
+
     for c in clone_list:
         clone_metadata_folder(c[0], c[1])
