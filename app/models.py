@@ -1,4 +1,4 @@
-from app import db
+from main import db
 
 class Database(db.Model):
     __tablename__ = "databases"
