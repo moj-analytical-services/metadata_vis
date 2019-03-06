@@ -1,15 +1,15 @@
 from flask import render_template, jsonify, request
-from app import app, db
-from app.forms import SearchForm
+from main import app, db
 
-from app.models import Database, Table, Column
+
+from models import Database, Table, Column
 
 
 @app.route('/')
 @app.route('/index')
 def index():
-    form = SearchForm()
-    return  render_template('index.html', title='Home', form=form)
+
+    return  render_template('index.html', title='Home')
 
 
 @app.route('/search/', methods=['get'])
