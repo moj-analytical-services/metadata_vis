@@ -1,0 +1,45 @@
+div.inside_header {
+    font-family: "nta", Arial, sans-serif;
+    font-size: 30px;
+    line-height: 1.5;
+    font-weight: 700;
+    text-transform: none;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    text-align: center
+}
+
+
+
+
+.grid-container .grid_box {
+    border: 1pt black solid;
+    padding: 5px;
+    margin: 5px;
+
+}
+
+main {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: "search_inputs search_inputs search_inputs search_inputs" "summary_table summary_table database_info database_info" "summary_table summary_table table_info table_info" "summary_table summary_table column_info column_info" "summary_table summary_table sample_sql sample_sql";
+  }
+
+  .search_inputs { grid-area: search_inputs; }
+
+  .summary_table { grid-area: summary_table; }
+
+  .database_info { grid-area: database_info; }
+
+  .table_info { grid-area: table_info; }
+
+  .column_info { grid-area: column_info; }
+
+  .sample_sql { grid-area: sample_sql; }
