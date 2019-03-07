@@ -3,7 +3,7 @@ import os
 import json
 from shutil import rmtree
 
-def clone_metadata_folder(git_repo, path_to_meta):
+def clone_metadata_folder(git_repo, path_to_meta, branch=None):
 
     temp_dir = "_temp_"
     repo_root_dir = "temprepo"
@@ -12,6 +12,14 @@ def clone_metadata_folder(git_repo, path_to_meta):
         os.makedirs(temp_dir)
 
     Git(temp_dir).clone(git_repo, repo_root_dir)
+    repo = Repo(os.path.join(temp_dir, repo_root_dir))
+
+
+    if branch:
+        repo.create_head(branch, repo.remotes.origin.refs[branch])  # create local branch "master" from remote "master"
+        repo.heads[branch].checkout()
+
+
 
     path_to_db_meta = os.path.join(temp_dir, repo_root_dir, path_to_meta)
     files = os.listdir(path_to_db_meta)
@@ -38,14 +46,23 @@ def clone_metadata_folder(git_repo, path_to_meta):
 
 
 if __name__ == "__main__":
+    # Each item is (git repo, relative path, OPTIONAL branch if not default)
     clone_list = []
     clone_list.append(("git@github.com:moj-analytical-services/airflow-occupeye-scraper.git", "glue/meta_data/occupeye_db"))
     clone_list.append(("git@github.com:moj-analytical-services/airflow_natstats_postcodes.git", "meta_data/curated"))
     clone_list.append(("git@github.com:moj-analytical-services/airflow_get_index_of_multiple_deprivation.git", "meta_data"))
+    clone_list.append(("git@github.com:moj-analytical-services/airflow-build-addressbase-premium.git", "meta_data"))
+
     clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/crest"))
     clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/lookups"))
     clone_list.append(("git@github.com:moj-analytical-services/airflow-magistrates-data-engineering.git", "meta_data/curated"))
     clone_list.append(("git@github.com:moj-analytical-services/airflow-nomis-transform.git", "meta_data/curated"))
+    clone_list.append(("git@github.com:moj-analytical-services/SOP_engineering_draft.git", "v1/meta_data/sop_transformed", "sldedupe"))
 
     for c in clone_list:
-        clone_metadata_folder(c[0], c[1])
+        if len(c) == 3:
+            clone_metadata_folder(c[0], c[1], c[2])
+        else:
+            clone_metadata_folder(c[0], c[1])
+
+
