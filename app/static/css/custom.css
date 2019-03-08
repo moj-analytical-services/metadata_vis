@@ -12,34 +12,41 @@ div.inside_header {
 
 
 
-
 .grid-container .grid_box {
-    border: 1pt black solid;
     padding: 5px;
     margin: 5px;
 
 }
+
 
 main {
     margin-left: 10%;
     margin-right: 10%;
 }
 
+input[type="search"] {
+    height: 30px;
+    font-size: 150%;
+    width: 500px;
+  }
+
+  .card {
+    background-color: #f8f8f8;
+    border: 1px solid #dee0e2;
+    padding: 12px;
+  }
+
+
+ /* Grid */
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 0.5fr 1fr 1fr 1fr 1fr;
-    grid-template-areas: "search_inputs search_inputs search_inputs search_inputs" "summary_table summary_table database_info database_info" "summary_table summary_table table_info table_info" "summary_table summary_table column_info column_info" "summary_table summary_table sample_sql sample_sql";
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: max-content max-content max-content;
+    grid-template-areas: "search_inputs search_inputs" "summary_table row_details" "summary_table row_details";
   }
 
   .search_inputs { grid-area: search_inputs; }
 
   .summary_table { grid-area: summary_table; }
 
-  .database_info { grid-area: database_info; }
-
-  .table_info { grid-area: table_info; }
-
-  .column_info { grid-area: column_info; }
-
-  .sample_sql { grid-area: sample_sql; }
+  .row_details { grid-area: row_details; }

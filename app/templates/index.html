@@ -5,22 +5,31 @@
 
 
 
-    <div id="outputs" class="grid-container">
-            <div class="search_inputs grid_box" id="search_inputs">
-                    <p>
-                    <label for="searchterms">Search terms</label><br>
-                    <input id="searchterms" name="searchterms" required="" size="32" type="search" value="">
-                    </p>
-                    </div>
-        <div class="summary_table grid_box" >
-            <p>Click on table rows to display details</p>
-            <div id="summary_table"></div>
-        </div>
-        <div class="database_info grid_box" id="database_info"></div>
-        <div class="table_info grid_box" id="table_info"></div>
-        <div class="column_info grid_box" id="column_info"></div>
-        <div class="sample_sql grid_box" id="sample_sql"></div>
+<div id="outputs" class="grid-container">
+    <div class="search_inputs grid_box" id="search_inputs">
+      <p>
+        <input id="searchterms" name="searchterms" type="search" placeholder="Enter search terms here and press enter"/>
+      </p>
     </div>
+    <div class="summary_table grid_box card">
+
+      <p><strong>Search results </strong> (Click on table rows to display details)</p>
+      <div id="summary_table"></div>
+    </div>
+    <div class="row_details">
+      <div class="database_info grid_box card" id="database_info"></div>
+      <div class="table_info grid_box card" id="table_info"></div>
+      <div class="column_info grid_box card" id="column_info"></div>
+      <div class="sample_sql grid_box card" id="sample_sql"></div>
+    </div>
+  </div>
+
+
+
+
+
+
+
 
 <script type=text/javascript>
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }}; //http://flask.pocoo.org/docs/1.0/patterns/jquery/#where-is-my-site
