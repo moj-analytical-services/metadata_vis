@@ -85,6 +85,7 @@ function tabulate_summary_data(data, container) {
     let col_headers = ["Database name", "Table name", "Column name"]
 
     var table = container.append('table')
+    table.attr('class', 'search_results')
     var thead = table.append('thead')
     var	tbody = table.append('tbody');
 
@@ -93,13 +94,15 @@ function tabulate_summary_data(data, container) {
       .selectAll('th')
       .data(col_headers).enter()
       .append('th')
-        .text(c => c);
+        .text(c => c)
+        .attr("class", "search_results");
 
     // create a row for each object in the data
     var rows = tbody.selectAll('tr')
       .data(data)
       .enter()
-      .append('tr');
+      .append('tr')
+      .attr("class", "search_results");
 
     rows.on("click", display_row_details)
 
