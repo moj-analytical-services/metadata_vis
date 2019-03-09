@@ -12,13 +12,6 @@ div.inside_header {
 
 
 
-.grid-container .grid_box {
-    padding: 5px;
-    margin: 5px;
-
-}
-
-
 main {
     margin-left: 10%;
     margin-right: 10%;
@@ -30,14 +23,24 @@ input[type="search"] {
     width: 500px;
   }
 
-  .card {
+.card {
     background-color: #f8f8f8;
     border: 1px solid #dee0e2;
-    padding: 12px;
+
+    margin: 8px;
+
   }
 
+.card-header {
+    background: #ccc;
+    padding: 8px;
+}
 
- /* Grid */
+.card-contents {
+    padding: 8px;
+}
+
+/* Grid */
 .grid-container {
     display: grid;
     grid-template-columns: max-content 1fr;
@@ -50,3 +53,21 @@ input[type="search"] {
   .summary_table { grid-area: summary_table; }
 
   .row_details { grid-area: row_details; }
+
+  /* Flex */
+
+  .flex-container {
+    min-height: 400px;
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: top;
+    align-items: stretch;
+    align-content: center;
+  }
+
+
+  .flex-item {
+    flex: 0 0 auto;
+  }

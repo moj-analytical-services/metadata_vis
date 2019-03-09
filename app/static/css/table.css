@@ -2,16 +2,17 @@ table {
     border-collapse: collapse;
   }
    th {
-    background: #ccc;
+    background: #eee;
   }
 
   th, td {
-    border: 1px solid #ccc;
+    /* border-right: 1px solid #ccc; */
+    /* border-left: 1px solid #ccc; */
     padding: 8px;
   }
 
   tr:nth-child(even) {
-    background: #efefef;
+    background: #FFF;
   }
 
   tr:hover {
