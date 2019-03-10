@@ -27,9 +27,23 @@ if __name__ == "__main__":
         with open(os.path.join(subfolder, "database.json")) as f:
             dbjson = json.load(f)
 
+        with open(os.path.join(subfolder, "_metadata_source.json")) as f:
+            metadata_source_json = json.load(f)
+
+        base_url = metadata_source_json["git_repo"].replace("git@github.com:", "https://github.com/").replace(".git", "")
+
+        if metadata_source_json["branch"]:
+            branch = metadata_source_json["branch"]
+        else:
+            branch = "master"
+
+        base_hyperlink = f"{base_url}/tree/{branch}/{metadata_source_json['path_to_meta']}"
+
+
         d = Database()
         d.db_name = dbjson["name"]
         d.db_desc = dbjson["description"]
+        d.db_metaloc = f"{base_hyperlink}/database.json"
 
         path = os.path.join(dbjson["bucket"], dbjson["base_folder"])
         d.db_loc = f"s3://{path}"
@@ -39,6 +53,7 @@ if __name__ == "__main__":
 
         files = os.listdir(subfolder)
         files = [f for f in files if f != "database.json"]
+        files = [f for f in files if f != "_metadata_source.json"]
         table_files = [f for f in files if f.endswith(".json")]
         for table_file in table_files:
             with open(os.path.join(subfolder, table_file)) as f:
@@ -48,6 +63,7 @@ if __name__ == "__main__":
             t.tbl_name = tbljson["name"]
             t.tbl_desc = tbljson["description"]
             t.tbl_loc = os.path.join(d.db_loc, tbljson["location"])
+            t.tbl_metaloc = f"{base_hyperlink}/{table_file}"
 
             t.databases = d
             db.session.add(t)

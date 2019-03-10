@@ -1,4 +1,5 @@
 populate_db/metadata_folders/
+populate_db/metadata_folders_copy/
 *.db
 ipynb_checkpoints/
 *.ipynb

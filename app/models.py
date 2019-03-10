@@ -6,6 +6,7 @@ class Database(db.Model):
     db_name = db.Column(db.String(64), index=True, unique=True)
     db_desc = db.Column(db.String(120), index=True)
     db_loc = db.Column(db.String(120))
+    db_metaloc = db.Column(db.String(120))
 
     tables = db.relationship('Table', backref='databases', lazy='dynamic')
 
@@ -18,6 +19,7 @@ class Table(db.Model):
     tbl_name = db.Column(db.String(64), index=True, unique=True)
     tbl_desc = db.Column(db.String(120), index=True)
     tbl_loc = db.Column(db.String(120))
+    tbl_metaloc = db.Column(db.String(120))
 
 
     db_id = db.Column(db.Integer, db.ForeignKey('databases.db_id'))
