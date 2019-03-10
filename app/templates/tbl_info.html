@@ -1,11 +1,16 @@
-
 <table>
-        <tr>
-            <th scope="row">Table name</th>
-            <td>{{table.tbl_name}}</td>
-        </tr>
-        <tr>
-            <th scope="row">Table description</th>
-            <td>{{table.tbl_desc}}</td>
-        </tr>
-    </table>
+  <tr>
+    <th scope="row">Table name</th>
+    <td>{{ table.tbl_name }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Table description</th>
+    <td>{{ table.tbl_desc }}</td>
+  </tr>
+  <tr>
+    <th scope="row">Table location</th>
+    <td>
+      <code>{{ table.tbl_loc }}</code>
+    </td>
+  </tr>
+</table>

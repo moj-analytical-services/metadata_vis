@@ -12,13 +12,14 @@ from main import db
 from models import Database, Table, Column
 
 import json
+import os
 
 
 if __name__ == "__main__":
 
     # db.drop_all() #TODO probably make this optional!!
+    # db.session.commit()
     os.remove("app/app.db")
-    db.session.commit()
     db.create_all()
 
     subfolders = [f.path for f in os.scandir("populate_db/metadata_folders/") if f.is_dir() ]
@@ -29,6 +30,9 @@ if __name__ == "__main__":
         d = Database()
         d.db_name = dbjson["name"]
         d.db_desc = dbjson["description"]
+
+        path = os.path.join(dbjson["bucket"], dbjson["base_folder"])
+        d.db_loc = f"s3://{path}"
 
         db.session.add(d)
         db.session.commit()
@@ -43,6 +47,8 @@ if __name__ == "__main__":
             t = Table()
             t.tbl_name = tbljson["name"]
             t.tbl_desc = tbljson["description"]
+            t.tbl_loc = os.path.join(d.db_loc, tbljson["location"])
+
             t.databases = d
             db.session.add(t)
             db.session.commit()
