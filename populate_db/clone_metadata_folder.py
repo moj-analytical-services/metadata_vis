@@ -62,16 +62,16 @@ if __name__ == "__main__":
     # Each item is (git repo, relative path, OPTIONAL branch if not default)
     clone_list = []
     clone_list.append(("git@github.com:moj-analytical-services/airflow-occupeye-scraper.git", "glue/meta_data/occupeye_db"))
-    clone_list.append(("git@github.com:moj-analytical-services/airflow_natstats_postcodes.git", "meta_data/curated"))
-    clone_list.append(("git@github.com:moj-analytical-services/airflow_get_index_of_multiple_deprivation.git", "meta_data"))
-    clone_list.append(("git@github.com:moj-analytical-services/airflow-build-addressbase-premium.git", "meta_data"))
+    # clone_list.append(("git@github.com:moj-analytical-services/airflow_natstats_postcodes.git", "meta_data/curated"))
+    # clone_list.append(("git@github.com:moj-analytical-services/airflow_get_index_of_multiple_deprivation.git", "meta_data"))
+    # clone_list.append(("git@github.com:moj-analytical-services/airflow-build-addressbase-premium.git", "meta_data"))
 
-    clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/crest"))
-    clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/lookups"))
+    # clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/crest"))
+    # clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/lookups"))
     clone_list.append(("git@github.com:moj-analytical-services/airflow-magistrates-data-engineering.git", "meta_data/curated"))
-    clone_list.append(("git@github.com:moj-analytical-services/airflow-nomis-transform.git", "meta_data/curated", "alpha"))
+    # clone_list.append(("git@github.com:moj-analytical-services/airflow-nomis-transform.git", "meta_data/curated", "alpha"))
     # clone_list.append(("git@github.com:moj-analytical-services/airflow-nomis-transform.git", "meta_data/denormalised", "alpha")) #no database.json
-    clone_list.append(("git@github.com:moj-analytical-services/SOP_engineering_draft.git", "v1/meta_data/sop_transformed", "sldedupe"))
+    # clone_list.append(("git@github.com:moj-analytical-services/SOP_engineering_draft.git", "v1/meta_data/sop_transformed", "sldedupe"))
 
     for c in clone_list:
         if len(c) == 3:

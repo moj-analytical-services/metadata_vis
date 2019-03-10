@@ -9,7 +9,7 @@ app_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardi
 sys.path.append(app_path)
 
 from main import db
-from models import Database, Table, Column
+from models import Database, Table, Column, Enum
 
 import json
 import os
@@ -74,10 +74,22 @@ if __name__ == "__main__":
                 c.clm_desc = column["description"]
                 c.clm_name = column["name"]
 
+                if "pattern" in column:
+                    c.clm_pattern = column["pattern"]
+
                 c.tables = t
 
                 db.session.add(c)
                 db.session.commit()
+
+                if "enum" in column:
+                    for val in column["enum"]:
+                        e = Enum()
+                        e.enum_value = val
+                        e.columns = c
+                        db.session.add(e)
+                        db.session.commit()
+
 
     # Get column
     sql = """
