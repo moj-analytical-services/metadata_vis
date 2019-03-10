@@ -16,7 +16,7 @@ class Database(db.Model):
 class Table(db.Model):
     __tablename__ = "tables"
     tbl_id = db.Column(db.Integer, primary_key=True)
-    tbl_name = db.Column(db.String(64), index=True, unique=True)
+    tbl_name = db.Column(db.String(64), index=True)
     tbl_desc = db.Column(db.String(120), index=True)
     tbl_loc = db.Column(db.String(120))
     tbl_metaloc = db.Column(db.String(120))
@@ -24,7 +24,7 @@ class Table(db.Model):
 
     db_id = db.Column(db.Integer, db.ForeignKey('databases.db_id'))
 
-    fields = db.relationship('Column', backref='tables', lazy='dynamic')
+    columns = db.relationship('Column', backref='tables', lazy='dynamic')
 
     def __repr__(self):
         return '<Table name {}>'.format(self.tbl_name)
@@ -34,7 +34,23 @@ class Column(db.Model):
     clm_id = db.Column(db.Integer, primary_key=True)
     clm_name = db.Column(db.String(64), index=True)
     clm_desc = db.Column(db.String(120), index=True)
+    clm_pattern = db.Column(db.String(120))
+    clm_enum = db.Column(db.String(120))
+
     tbl_id = db.Column(db.Integer, db.ForeignKey('tables.tbl_id'))
 
+    enums = db.relationship('Enum', backref='columns', lazy='dynamic')
+
     def __repr__(self):
-        return '<Column name {}>'.format(self.name)
+        return '<Column name {}>'.format(self.clm_name)
+
+
+class Enum(db.Model):
+    __tablename__ = "enums"
+    enum_id = db.Column(db.Integer, primary_key=True)
+    enum_value = db.Column(db.String(120))
+
+    clm_id = db.Column(db.Integer, db.ForeignKey('columns.clm_id'))
+
+    def __repr__(self):
+        return '<Enum value {}>'.format(self.enum_value)

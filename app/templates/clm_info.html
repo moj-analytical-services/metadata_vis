@@ -8,4 +8,27 @@
             <th scope="row">Column description</th>
             <td>{{column.clm_desc}}</td>
         </tr>
+
+        {% if column.enums.count() > 0 %}
+        <tr>
+
+            <th scope="row">Categorical values</th>
+            <td>This column contains only values from the following list:
+            {% for e in column.enums %}
+            <code>'{{e.enum_value}}'</code>
+            {% endfor %}
+        </td>
+        </tr>
+        {% endif %}
+
+
+        {% if column.clm_pattern is not none %}
+        <tr>
+            <th scope="row">Column pattern</th>
+            <td>This column adheres to the following regex pattern: <code>{{column.clm_pattern}}</code>.  See <a href="https://regexper.com/#{{column.clm_pattern|urlencode}}">here</a> for an explanation of this regular expression.</td>
+
+        </tr>
+        {% endif %}
+
+
     </table>
