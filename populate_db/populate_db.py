@@ -64,6 +64,11 @@ if __name__ == "__main__":
             t.tbl_desc = tbljson["description"]
             t.tbl_loc = os.path.join(d.db_loc, tbljson["location"])
             t.tbl_metaloc = f"{base_hyperlink}/{table_file}"
+            t.tbl_datatype = tbljson["data_format"]
+            if "partitions" in tbljson:
+                t.tbl_partitions = json.dumps(tbljson["partitions"])
+            else:
+                t.tbl_partitions = None
 
             t.databases = d
             db.session.add(t)
@@ -73,6 +78,11 @@ if __name__ == "__main__":
                 c = Column()
                 c.clm_desc = column["description"]
                 c.clm_name = column["name"]
+                c.clm_datatype = column["type"]
+                if "partitions" in tbljson:
+                    c.clm_is_parition = column["name"] in tbljson["partitions"]
+                else:
+                    c.clm_is_parition = False
 
                 if "pattern" in column:
                     c.clm_pattern = column["pattern"]
