@@ -13,6 +13,25 @@
       <code>{{ table.tbl_loc }}</code>
     </td>
   </tr>
+  <tr>
+    <th scope="row">Table data format</th>
+    <td>
+      The data in this table is stored in <code>{{ table.tbl_datatype }}</code> format
+    </td>
+  </tr>
+  {% if table.tbl_partitions is not none %}
+  <tr>
+    <th scope="row">Table partitions</th>
+    <td>
+      The data is stored in folders, partitioned on
+
+      <code>{{table.tbl_partitions}}</code>
+
+    </td>
+  </tr>
+  {% endif %}
+
+
   <th scope="row">Table metadata location</th>
         <td><a href="{{table.tbl_metaloc}}">View on Github</a></td>
     </tr>

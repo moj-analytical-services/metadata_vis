@@ -20,7 +20,8 @@ class Table(db.Model):
     tbl_desc = db.Column(db.String(120), index=True)
     tbl_loc = db.Column(db.String(120))
     tbl_metaloc = db.Column(db.String(120))
-
+    tbl_datatype = db.Column(db.String(120))
+    tbl_partitions = db.Column(db.String(120))
 
     db_id = db.Column(db.Integer, db.ForeignKey('databases.db_id'))
 
@@ -36,6 +37,9 @@ class Column(db.Model):
     clm_desc = db.Column(db.String(120), index=True)
     clm_pattern = db.Column(db.String(120))
     clm_enum = db.Column(db.String(120))
+    clm_datatype = db.Column(db.String(120))
+    clm_is_partition = db.Column(db.Boolean)
+
 
     tbl_id = db.Column(db.Integer, db.ForeignKey('tables.tbl_id'))
 

@@ -8,7 +8,16 @@
             <th scope="row">Column description</th>
             <td>{{column.clm_desc}}</td>
         </tr>
-
+        <tr>
+            <th scope="row">Column data type</th>
+            <td>{{column.clm_datatype}}</td>
+        </tr>
+        {% if clm_is_partition %}
+        <tr>
+            <th scope="row">Partition</th>
+            <td>This column is a 'partition' in s3, i.e. the value in this column is derived from the name of the folder in which the datasets are stored</td>
+        </tr>
+        {% endif %}
         {% if column.enums.count() > 0 %}
         <tr>
 
