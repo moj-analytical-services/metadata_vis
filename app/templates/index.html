@@ -2,46 +2,54 @@
 
 {% block content %}
 
-
-
-
 <div id="outputs" class="grid-container">
+
     <div class="search_inputs card card-contents" id="search_inputs">
       <div>
-        <input id="searchterms" name="searchterms" type="search" placeholder="Enter search terms here and press enter"/>
+        <input
+          id="searchterms"
+          name="searchterms"
+          type="search"
+          placeholder="Enter search terms here and press enter"
+        />
       </div>
     </div>
-    <div class="summary_table card ">
 
+    <div class="summary_table card ">
       <h3 class="card-header">Search results</h3>
-        <p class="card-contents">Click on table rows to display details</p>
+      <p class="card-contents">Click on table rows to display details</p>
       <div id="summary_table" class="card-contents"></div>
     </div>
+
     <div class="row_details flex-container">
-      <div class="database_info card flex-item" >
-          <h3 class="card-header">Database info</h3>
-          <div class="card-contents" id="database_info"></div>
-      </div>
-      <div class="table_info card flex-item" >
-            <h3 class="card-header">Table info</h3>
-            <div class="card-contents" id="table_info"></div>
-        </div>
 
-        <div class="column_info card flex-item" >
-                <h3 class="card-header">Column info</h3>
-                <div class="card-contents" id="column_info"></div>
-            </div>
-            <div class="sample_sql card flex-item" >
-                    <h3 class="card-header">Sample SQL statement</h3>
-                    <div class="card-contents"> <code  id="sample_sql"></code><div>
-                </div>
-
-
-
-
-
+    <div class="column_info card flex-item">
+        <h3 class="card-header">Column info</h3>
+        <div class="card-contents" id="column_info"></div>
     </div>
+
+    <div class="table_info card flex-item">
+        <h3 class="card-header">Table info</h3>
+        <div class="card-contents" id="table_info"></div>
+      </div>
+
+
+
+      <div class="database_info card flex-item">
+        <h3 class="card-header">Database info</h3>
+        <div class="card-contents" id="database_info"></div>
+      </div>
+
+      <div class="sample_sql card flex-item">
+        <h3 class="card-header">Example code</h3>
+        <div class="card-contents">
+          <div id="sample_sql"></div>
+        </div>
+      </div>
+    </div>
+
   </div>
+
 
 
 
@@ -55,7 +63,9 @@
     URL_FOR_SEARCH = "{{ url_for('search') }}"
 
 </script>
+<script src= "{{url_for('static', filename='js/prism.js')}}"></script>
 <script src= "{{url_for('static', filename='js/main.js')}}"></script>
+
 
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
