@@ -1,0 +1,20 @@
+<table>
+    <tr>
+        <th scope="row">Sample SQL</th>
+        <td><pre><code class="language-sql">SELECT {{column.clm_name}}, *
+FROM {{column.tables.databases.db_name}}.{{column.tables.tbl_name}}
+LIMIT 10</code></pre></td>
+    </tr>
+
+    <tr>
+        <th scope="row">Sample R code</th>
+        <td>
+<pre><code class="language-r">devtools::install_github('moj-analytical-services/dbtools') # Needed only if you don't already have it installed
+sql <- "SELECT {{column.clm_name}}, * FROM {{column.tables.databases.db_name}}.{{column.tables.tbl_name}} LIMIT 10"
+df <- dbtools::read_sql(sql)
+show(df) # or use View(df) to show in R Studio's data viewer</code></pre>
+        </td>
+    </tr>
+
+
+</table>

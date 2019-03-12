@@ -55,3 +55,11 @@ def get_clm_info():
     id = request.args.get('id')
     column = Column.query.get(id)
     return render_template("clm_info.html", column = column)
+
+@app.route('/sample_code/', methods=['get'])
+def get_sample_code():
+    clm_id = request.args.get('clm_id')
+    column = Column.query.get(clm_id)
+    # table = column.table
+    # database = table.database
+    return render_template("sample_code.html", column = column)

@@ -10,8 +10,6 @@ div.inside_header {
     text-align: center
 }
 
-
-
 main {
     margin-left: 10%;
     margin-right: 10%;
@@ -22,6 +20,7 @@ input[type="search"] {
     font-size: 150%;
     width: 500px;
   }
+
 
 .card {
     background-color: #f8f8f8;

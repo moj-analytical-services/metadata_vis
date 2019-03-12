@@ -51,16 +51,6 @@ function display_search_results(data) {
 
 }
 
-function populate_sample_sql(d) {
-
-    sql = `SELECT ${d.clm_name}, *
-    FROM ${d.db_name}.${d.tbl_name}
-    LIMIT 10`
-
-    d3.select("#sample_sql").html(sql)
-
-
-}
 
 function display_row_details(d) {
 
@@ -76,7 +66,12 @@ function display_row_details(d) {
         d3.select("#column_info").html(response)
     });
 
-    populate_sample_sql(d)
+    d3.text(`/sample_code/?clm_id=${d["clm_id"]}`).then(function(response) {
+        d3.select("#sample_sql").html(response)
+        Prism.highlightAll();
+    });
+
+
 }
 
 function tabulate_summary_data(data, container) {
