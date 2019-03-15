@@ -47,12 +47,21 @@ function display_search_results(data) {
 
     tabulate_summary_data(SEARCH_DATA, container)
 
-    display_row_details(SEARCH_DATA[0])
+    let first_row = document.querySelectorAll("#summary_table tbody tr")[0]
+
+    display_row_details.call(first_row, SEARCH_DATA[0])
+}
+
+function highlight_row(row, d) {
+    d3.selectAll(".highlighted").classed("highlighted", false)
+    d3.select(row).attr("class", "highlighted")
 
 }
 
 
 function display_row_details(d) {
+
+    highlight_row(this, d)
 
     d3.text(`/db_info/?id=${d["db_id"]}`).then(function(response) {
         d3.select("#database_info").html(response)

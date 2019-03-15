@@ -21,6 +21,9 @@ input[type="search"] {
     width: 500px;
   }
 
+.highlighted {
+  background-color: yellow
+}
 
 .card {
     background-color: #f8f8f8;
@@ -41,8 +44,10 @@ input[type="search"] {
 
 /* Grid */
 .grid-container {
+
     display: grid;
-    grid-template-columns: max-content 1fr;
+    max-width: 1fr;
+    grid-template-columns: 45% 55%;
     grid-template-rows: max-content max-content max-content;
     grid-template-areas: "search_inputs search_inputs" "summary_table row_details" "summary_table row_details";
   }
@@ -64,9 +69,15 @@ input[type="search"] {
     justify-content: top;
     align-items: stretch;
     align-content: center;
+    overflow: auto;
   }
 
 
   .flex-item {
     flex: 0 0 auto;
   }
+
+#summary_table {
+  max-height: 100vh;
+  overflow: auto;
+}
