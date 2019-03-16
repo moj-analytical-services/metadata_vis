@@ -1,0 +1,23 @@
+<table>
+    <tr>
+        <th scope="row">Data owners</th>
+        <td>The following users are administators of this dataset and can give you access:</br>
+            {% for ar in accessrights %}
+                {% if ar.ar_is_admin %}
+                    <code>{{ar.ar_email}};</code>&nbsp;&nbsp;
+                {% endif %}
+            {% endfor %}
+        </td>
+    </tr>
+        <tr>
+            <th scope="row">Data users</th>
+            <td>In addition, the following users have access to this data and may be able to help you with queries: </br>
+                {% for ar in accessrights %}
+                {% if not ar.ar_is_admin %}
+                    <code>{{ar.ar_email}};</code>&nbsp;&nbsp;
+                {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+
+</table>

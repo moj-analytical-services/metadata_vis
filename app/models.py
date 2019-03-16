@@ -6,12 +6,14 @@ class Database(db.Model):
     db_name = db.Column(db.String(64), index=True, unique=True)
     db_desc = db.Column(db.String(120), index=True)
     db_loc = db.Column(db.String(120))
+    db_s3bucket = db.Column(db.String(120))
     db_metaloc = db.Column(db.String(120))
 
     tables = db.relationship('Table', backref='databases', lazy='dynamic')
+    enums = db.relationship('AccessRight', backref='databases', lazy='dynamic')
 
     def __repr__(self):
-        return '<Name {}>'.format(self.name)
+        return '<Name {}>'.format(self.db_name)
 
 class Table(db.Model):
     __tablename__ = "tables"
@@ -58,3 +60,16 @@ class Enum(db.Model):
 
     def __repr__(self):
         return '<Enum value {}>'.format(self.enum_value)
+
+class AccessRight(db.Model):
+    __tablename__ = "accessrights"
+    ar_id = db.Column(db.Integer, primary_key=True)
+    ar_s3bucket = db.Column(db.String(120))
+    ar_git_username = db.Column(db.String(120))
+    ar_email = db.Column(db.String(120))
+    ar_is_admin = db.Column(db.Boolean)
+
+    db_id = db.Column(db.Integer, db.ForeignKey('databases.db_id'))
+
+    def __repr__(self):
+        return '<Access rights value {}>'.format(self.ar_s3bucket)
