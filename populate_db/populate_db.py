@@ -2,18 +2,58 @@
 # source venv/bin/activate
 # python populate_db/populate_db.py
 
+
+
 import sys
 import os
+import requests
+from requests.auth import HTTPBasicAuth
 
 app_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, "app"))
 sys.path.append(app_path)
 
+
+
 from main import db
-from models import Database, Table, Column, Enum
+from models import Database, Table, Column, Enum, AccessRight
+from db_secrets import DJANGO_PASSWORD, DJANGO_USERNAME
 
 import json
 import os
 
+
+def create_accessrights_table():
+
+    s3buckets_results = []
+    nextpage = True
+    url = 'https://cpanelapi-master.services.alpha.mojanalytics.xyz/s3buckets/'
+    while nextpage:
+        r = requests.get(url, auth=HTTPBasicAuth(DJANGO_USERNAME, DJANGO_PASSWORD))
+        s3buckets = json.loads(r.text)
+        s3buckets_results.extend(s3buckets["results"])
+        url = s3buckets['next']
+        if not s3buckets['next']:
+            nextpage = False
+
+    for r in s3buckets_results:
+        users = r["users3buckets"]
+        for user in users:
+
+            ar = AccessRight()
+
+            ar.ar_s3bucket = r["arn"].replace("arn:aws:s3:::", "")
+            ar.ar_git_username = user["user"]["username"]
+            ar.ar_email = user["user"]["email"]
+            ar.ar_is_admin = user["is_admin"]
+
+            dbs = Database.query.filter(
+                Database.db_s3bucket == ar.ar_s3bucket).first()
+
+
+            ar.databases = dbs
+
+            db.session.add(ar)
+            db.session.commit()
 
 if __name__ == "__main__":
 
@@ -21,6 +61,8 @@ if __name__ == "__main__":
     # db.session.commit()
     os.remove("app/app.db")
     db.create_all()
+
+
 
     subfolders = [f.path for f in os.scandir("populate_db/metadata_folders/") if f.is_dir() ]
     for subfolder in subfolders:
@@ -47,9 +89,11 @@ if __name__ == "__main__":
 
         path = os.path.join(dbjson["bucket"], dbjson["base_folder"])
         d.db_loc = f"s3://{path}"
+        d.db_s3bucket = dbjson["bucket"]
 
         db.session.add(d)
         db.session.commit()
+
 
         files = os.listdir(subfolder)
         files = [f for f in files if f != "database.json"]
@@ -100,6 +144,7 @@ if __name__ == "__main__":
                         db.session.add(e)
                         db.session.commit()
 
+    create_accessrights_table()
 
     # Get column
     sql = """
@@ -142,6 +187,7 @@ if __name__ == "__main__":
     # rows = cur.fetchall()
     print(rows.cursor.description)
     # print(rows.fetchall())
+
 
 
 

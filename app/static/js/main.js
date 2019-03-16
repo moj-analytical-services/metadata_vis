@@ -66,6 +66,10 @@ function display_row_details(d) {
         d3.select("#column_info").html(response)
     });
 
+    d3.text(`/ar_info/?db_id=${d["db_id"]}`).then(function (response) {
+        d3.select("#accessrights_info").html(response)
+    });
+
     d3.text(`/sample_code/?clm_id=${d["clm_id"]}`).then(function(response) {
         d3.select("#sample_sql").html(response)
         Prism.highlightAll();

@@ -2,7 +2,7 @@ from flask import render_template, jsonify, request
 from main import app, db
 
 
-from models import Database, Table, Column
+from models import Database, Table, Column, AccessRight
 
 
 @app.route('/')
@@ -63,3 +63,10 @@ def get_sample_code():
     # table = column.table
     # database = table.database
     return render_template("sample_code.html", column = column)
+
+@app.route('/ar_info/', methods=['get'])
+def get_accessrights_info():
+    db_id = request.args.get('db_id')
+    accessrights = AccessRight.query.filter(AccessRight.db_id == db_id).all()
+    print(len(accessrights))
+    return render_template("ar_info.html", accessrights=accessrights)
