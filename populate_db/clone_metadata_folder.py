@@ -68,6 +68,11 @@ if __name__ == "__main__":
 
     # clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/crest"))
     # clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/lookups"))
+   
+    clone_list.append(("git@github.com:moj-analytical-services/airflow-hocas-to-athena.git", "meta_data/curated"))
+    clone_list.append(("git@github.com:moj-analytical-services/airflow-xhibit-ap.git", "meta_data/xhibit"))
+    clone_list.append(("git@github.com:moj-analytical-services/airflow-xhibit-ap.git", "meta_data/xhibit_der"))
+
     clone_list.append(("git@github.com:moj-analytical-services/airflow-magistrates-data-engineering.git", "meta_data/curated"))
     # clone_list.append(("git@github.com:moj-analytical-services/airflow-nomis-transform.git", "meta_data/curated", "alpha"))
     # clone_list.append(("git@github.com:moj-analytical-services/airflow-nomis-transform.git", "meta_data/denormalised", "alpha")) #no database.json
