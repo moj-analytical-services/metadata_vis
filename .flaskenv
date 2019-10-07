@@ -1,1 +1,1 @@
-FLASK_APP=metadata_tool.py
+FLASK_APP=app/main.py
