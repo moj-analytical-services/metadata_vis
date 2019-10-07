@@ -26,7 +26,7 @@ def create_accessrights_table():
 
     s3buckets_results = []
     nextpage = True
-    url = 'https://cpanelapi-master.services.alpha.mojanalytics.xyz/s3buckets/'
+    url = 'https://controlpanel.services.alpha.mojanalytics.xyz/api/cpanel/v1/s3buckets/'
     while nextpage:
         r = requests.get(url, auth=HTTPBasicAuth(DJANGO_USERNAME, DJANGO_PASSWORD))
         s3buckets = json.loads(r.text)

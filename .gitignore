@@ -2,6 +2,7 @@ populate_db/db_secrets.py
 secrets.py
 populate_db/metadata_folders/
 populate_db/metadata_folders_copy/
+populate_db/metadata_folders_old/
 *.db
 ipynb_checkpoints/
 *.ipynb
