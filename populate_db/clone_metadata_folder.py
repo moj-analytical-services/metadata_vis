@@ -61,22 +61,31 @@ def clone_metadata_folder(git_repo, path_to_meta, branch=None):
 if __name__ == "__main__":
     # Each item is (git repo, relative path, OPTIONAL branch if not default)
     clone_list = []
-    clone_list.append(("git@github.com:moj-analytical-services/airflow-occupeye-scraper.git", "glue/meta_data/occupeye_db"))
-    # clone_list.append(("git@github.com:moj-analytical-services/airflow_natstats_postcodes.git", "meta_data/curated"))
-    # clone_list.append(("git@github.com:moj-analytical-services/airflow_get_index_of_multiple_deprivation.git", "meta_data"))
-    # clone_list.append(("git@github.com:moj-analytical-services/airflow-build-addressbase-premium.git", "meta_data"))
+    pre = "git@github.com: moj-analytical-services/"
+    # Courts
+    clone_list.append((pre + "airflow-hocas-to-athena.git", "meta_data/curated"))
+    clone_list.append((pre + "airflow-xhibit-ap.git", "meta_data/xhibit"))
+    clone_list.append((pre + "airflow-xhibit-ap.git", "meta_data/xhibit_der"))
 
-    # clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/crest"))
-    # clone_list.append(("git@github.com:moj-analytical-services/crest_engineering_draft.git", "v1/meta_data/lookups"))
-   
-    clone_list.append(("git@github.com:moj-analytical-services/airflow-hocas-to-athena.git", "meta_data/curated"))
-    clone_list.append(("git@github.com:moj-analytical-services/airflow-xhibit-ap.git", "meta_data/xhibit"))
-    clone_list.append(("git@github.com:moj-analytical-services/airflow-xhibit-ap.git", "meta_data/xhibit_der"))
+    # TAR?
+    clone_list.append((pre + "airflow-magistrates-data-engineering.git", "meta_data/curated"))
 
-    clone_list.append(("git@github.com:moj-analytical-services/airflow-magistrates-data-engineering.git", "meta_data/curated"))
-    # clone_list.append(("git@github.com:moj-analytical-services/airflow-nomis-transform.git", "meta_data/curated", "alpha"))
-    # clone_list.append(("git@github.com:moj-analytical-services/airflow-nomis-transform.git", "meta_data/denormalised", "alpha")) #no database.json
-    # clone_list.append(("git@github.com:moj-analytical-services/SOP_engineering_draft.git", "v1/meta_data/sop_transformed", "sldedupe"))
+    clone_list.append((pre + "criminal_court_timeliness_linking.git", "meta_data"))
+
+    # Prisons
+    clone_list.append((pre + "airflow-nomis-transform.git", "meta_data/curated"))
+    clone_list.append((pre + "airflow-nomis-transform.git", "meta_data/denormalised")) #no database.json
+
+    # Misc
+    clone_list.append((pre + "airflow-occupeye-scraper.git", "glue/meta_data/occupeye_db"))
+    # clone_list.append((pre + "airflow_natstats_postcodes.git", "meta_data/curated"))
+    # clone_list.append((pre + "airflow_get_index_of_multiple_deprivation.git", "meta_data"))
+    # clone_list.append((pre + "airflow-build-addressbase-premium.git", "meta_data"))
+
+    # clone_list.append((pre + "crest_engineering_draft.git", "v1/meta_data/crest"))
+    # clone_list.append((pre + "crest_engineering_draft.git", "v1/meta_data/lookups"))
+
+    # clone_list.append((pre + "SOP_engineering_draft.git", "v1/meta_data/sop_transformed", "sldedupe"))
 
     for c in clone_list:
         if len(c) == 3:

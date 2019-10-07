@@ -66,6 +66,7 @@ if __name__ == "__main__":
 
     subfolders = [f.path for f in os.scandir("populate_db/metadata_folders/") if f.is_dir() ]
     for subfolder in subfolders:
+        print(subfolder)
         with open(os.path.join(subfolder, "database.json")) as f:
             dbjson = json.load(f)
 
