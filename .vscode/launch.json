@@ -50,7 +50,7 @@
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "metadata_tool.py"
+                "FLASK_APP": "app/main.py"
             },
             "args": [
                 "run",

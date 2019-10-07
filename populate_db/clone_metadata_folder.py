@@ -61,7 +61,7 @@ def clone_metadata_folder(git_repo, path_to_meta, branch=None):
 if __name__ == "__main__":
     # Each item is (git repo, relative path, OPTIONAL branch if not default)
     clone_list = []
-    pre = "git@github.com: moj-analytical-services/"
+    pre = "git@github.com:moj-analytical-services/"
     # Courts
     clone_list.append((pre + "airflow-hocas-to-athena.git", "meta_data/curated"))
     clone_list.append((pre + "airflow-xhibit-ap.git", "meta_data/xhibit"))
@@ -73,7 +73,7 @@ if __name__ == "__main__":
     clone_list.append((pre + "criminal_court_timeliness_linking.git", "meta_data"))
 
     # Prisons
-    clone_list.append((pre + "airflow-nomis-transform.git", "meta_data/curated"))
+    clone_list.append((pre + "airflow-nomis-transform.git", "meta_data/nomis_curated"))
     clone_list.append((pre + "airflow-nomis-transform.git", "meta_data/denormalised")) #no database.json
 
     # Misc
@@ -89,8 +89,10 @@ if __name__ == "__main__":
 
     for c in clone_list:
         if len(c) == 3:
+            print((c[0], c[1], c[2]))
             clone_metadata_folder(c[0], c[1], c[2])
         else:
+            print((c[0], c[1]))
             clone_metadata_folder(c[0], c[1])
 
 
